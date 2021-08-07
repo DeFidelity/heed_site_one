@@ -1,0 +1,42 @@
+{% extends 'blog/base.html' %}
+{% block headblock%}
+{% endblock %}
+{% block content %}
+<div class="centerstage mt-3">
+    <div class="row">
+      {% for post in post_list %}
+        <div class="card mt-2 col-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <img src="{{ post.image }}" alt="picture portraying {{ post.title }}" class="img-fluid">
+            <small>Published on: {{post.published_date|date:"d m y"}}</small>
+            <p class="card-text">{{post.text|safe|slice:100}}</p>
+            <a class="stretched-link" href="{% url 'post_detail' pk=post.pk%}">Read More</a>
+            <hr>
+            <small>Thought Shared: {{ post.approve_comments.count }}</small>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+{% endblock %}
+
+
+
+
+
+
+<!-- {% block ontent %}
+<div class="centerstage">
+    {% for post in post_list %}
+    <div class="post">
+      <li><a href="{% url 'post_detail' pk=post.pk%}">{{ post.title }}</a></li>
+    </div>
+    <div class="date">
+      <p>Published on <small>{{post.published_date|date:"d m y"}}</small></p>
+    </div>
+    <a href="{% url 'post_detail' pk=post.pk%}">Comments: {{ post.approve_comments.count }}</a>
+    {% endfor %}
+  </div>
+{% endblock %} -->

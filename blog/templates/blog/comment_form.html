@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<form  method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  {{form.media}}
+  <!-- <div class="form-group form-control">
+    {{ form.author.label }}
+    {{ form.author }}
+  </div>
+  <br>
+  <div class="form-group form-control">
+    {{ form.text.label }}
+    {{ form.text }}
+    {{ form.media }}
+  </div>
+  <br> -->
+  <input type="submit" class="btn btn-primary" value="Share">
+</form>
+{% endblock %}

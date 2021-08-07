@@ -1,0 +1,77 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Blog Project</title>
+
+
+        <link rel="stylesheet" href="{% static 'blog/bootstrap.css'%}">
+        <link rel="stylesheet" href="{% static 'blog/styles.css'%}">
+        {% block headblock%}
+        {%endblock%}
+
+        {# Fonts#}
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
+
+<body class=''>
+  <section>
+    <header>
+      <a class="logo" href="{% url 'post_list' %}">HeednGrow</a>
+      <div class="toggle"></div>
+      <ul class="navigation">
+        <li><a style="--i:1" class="bar" href="{% url 'post_list' %}">Home</a></li>
+        <li><a style="--i:2" class="bar" href="{% url 'about'%}">About</a></li>
+        <li><a style="--i:3" class="bar" href="https://www.github.com">Github</a></li>
+        <li><a style="--i:4" class="bar" href="https://www.linkedin.com">LinkedIn</a></li>
+
+        {% if user.is_authenticated %}
+        <li>
+          <a style="--i:1" class="bar" href="{% url 'post_new' %}" >New Post</a>
+        </li>
+
+        <li>
+          <a style="--i:2" class="bar" href="{% url 'post_draft_list' %}">Drafts</a>
+        </li>
+        <li>
+          <a style="--i:3" class="bar" href="{% url 'logout' %}" >Logout</a>
+        </li>
+
+        <li>
+          <a style="--i:5" class="bar" >Welcome: {{ user.username }}</a>
+        </li>
+          {% else %}
+          <li><a style="--i:5" class="bar" href="{% url 'login' %}" >Login</a></li>
+        {% endif %}
+
+      </ul>
+    </header>
+  </section>
+
+  {# The actual blog posts#}
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-md-8">
+                  <div class="blog_posts">
+                    {% block content %}
+                    {% endblock %}
+                  </div>
+                </div>
+            </div>
+        </div>
+
+{# SCRIPTS#}
+<script>
+const menuToggle = document.querySelector('.toggle');
+const navigation = document.querySelector('.navigation');
+const hovercatch = document.querySelectorAll('.bar');
+
+menuToggle.onclick = function(){
+  menuToggle.classList.toggle('active');
+  navigation.classList.toggle('active');
+  hovercatch.classList.toggle('active');
+}
+</script>
+<script type="text/javascript" src="{% static 'blog/js/script.js' %}"></script>
+<script type="text/javascript" src="{% static 'blog/js/bootstrap.js' %}"></script>
+</body>
+</html>
